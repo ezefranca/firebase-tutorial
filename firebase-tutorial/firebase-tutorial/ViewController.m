@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <Firebase/Firebase.h>
 
 @interface ViewController ()
 
@@ -16,6 +17,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Create a reference to a Firebase location
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://boiling-inferno-8965.firebaseio.com"];
+    // Write data to Firebase
+    [myRootRef s];
+    
+    [myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"%@ -> %@", snapshot.key, snapshot.value);
+    }];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
